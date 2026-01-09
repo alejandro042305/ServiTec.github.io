@@ -74,13 +74,90 @@
             color: #2563eb;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        .mobile-menu-sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu-sidebar.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #475569;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 20px;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-size: 18px;
+            font-weight: 500;
+            display: block;
+            padding: 12px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav-links a:hover {
+            background: #f1f5f9;
+            color: #2563eb;
+        }
+
+        .mobile-cta {
+            padding: 0 20px 20px;
+        }
+
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
+            color: #475569;
         }
+
         .cta-button {
             background: #10b981;
             color: white;
@@ -99,11 +176,6 @@
             background: #059669;
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
-        }
-
-        .cta-button svg {
-            width: 18px;
-            height: 18px;
         }
 
         .hero {
@@ -230,51 +302,6 @@
             background: rgba(255, 255, 255, 0.1);
             color: white;
             transform: translateY(-2px);
-        }
-        .stats-card {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .stats-card::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 28px;
-            z-index: -1;
-            opacity: 0.3;
-            transform: rotate(3deg);
-        }
-
-        .experience-badge {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            padding: 40px;
-            border-radius: 16px;
-            text-align: center;
-        }
-
-        .experience-badge .big-number {
-            font-size: 64px;
-            font-weight: bold;
-            color: #2563eb;
-            margin-bottom: 16px;
-        }
-
-        .experience-badge .title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 12px;
-        }
-
-        .experience-badge .description {
-            font-size: 16px;
-            color: #475569;
-            line-height: 1.6;
         }
 
         .brands-section {
@@ -514,41 +541,470 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        @media (max-width: 768px) {
-        .hero {
-            padding: 120px 0 60px 0;
+        .contact {
+            padding: 100px 0;
+            background: white;
         }
 
-        .hero-content {
-            width: 95%;
-            height: auto;
-            min-height: 400px;
-            border: 0.5px solid rgba(255, 255, 255, 0.6);
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
         }
 
-        .hero-text {
-            padding: 30px 20px;
-        }
-
-        .hero-text h1 {
-            font-size: 24px;
-        }
-
-        .hero-text p {
-            font-size: 13px;
-        }
-
-        .hero-buttons {
+        .contact-info-column {
+            display: flex;
             flex-direction: column;
+            gap: 24px;
         }
 
-        .btn-primary, .btn-secondary {
-            width: 100%;
-            justify-content: center;
-            font-size: 13px;
-            padding: 10px 20px;
+        .contact-card {
+            padding: 30px;
+            border-radius: 20px;
+            transition: all 0.3s;
         }
-    }
+
+        .contact-card.phone {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+        }
+
+        .contact-card.email {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        }
+
+        .contact-card.location {
+            background: linear-gradient(135deg, #e9d5ff, #d8b4fe);
+        }
+
+        .contact-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 16px;
+        }
+
+        .contact-card.phone svg { stroke: #10b981; }
+        .contact-card.email svg { stroke: #2563eb; }
+        .contact-card.location svg { stroke: #8b5cf6; }
+
+        .contact-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .contact-card a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .contact-form-container {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-form-container h3 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .contact-form-container .subtitle {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #2563eb;
+            color: white;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .privacy-notice {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .privacy-notice a {
+            color: #2563eb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .privacy-notice a:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal de Política de Privacidad */
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .privacy-modal-content {
+            background: white;
+            margin: 3% auto;
+            padding: 40px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .privacy-modal-content h2 {
+            font-size: 28px;
+            color: #0f172a;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .privacy-modal-content p {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .privacy-close {
+            color: #64748b;
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .privacy-close:hover {
+            color: #2563eb;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        .close-modal {
+            color: #64748b;
+            float: right;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #2563eb;
+        }
+
+        .modal-content h2 {
+            font-size: 36px;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        .modal-description {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .map-container {
+            margin-bottom: 32px;
+        }
+
+        .coverage-areas {
+            background: #f8fafc;
+            padding: 32px;
+            border-radius: 16px;
+        }
+
+        .coverage-areas h3 {
+            font-size: 24px;
+            color: #0f172a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .office-info {
+            text-align: center;
+        }
+
+        .office-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .office-card h4 {
+            font-size: 28px;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        .office-address {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .office-city {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .office-description {
+            font-size: 16px;
+            color: #475569;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #12244d;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .whatsapp-float:hover {
+            background: #20ba5a;
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .phone-float {
+            position: fixed;
+            bottom: 110px;
+            right: 32px;
+            background: #2563eb;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.4);
+            text-decoration: none;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .phone-float:hover {
+            background: #1d4ed8;
+            transform: scale(1.1);
+        }
+
+        .phone-float svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .cta-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 0 60px 0;
+            }
+
+            .hero-content {
+                width: 95%;
+                height: auto;
+                min-height: 400px;
+                border: 0.5px solid rgba(255, 255, 255, 0.6);
+            }
+
+            .hero-text {
+                padding: 30px 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .hero-text p {
+                font-size: 16px;
+            }
+
+            .hero-text .badge {
+                font-size: 14px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                font-size: 16px;
+                padding: 14px 24px;
+            }
+
+            .modal-content, .privacy-modal-content {
+                margin: 10% auto;
+                padding: 24px;
+                width: 95%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -570,16 +1026,41 @@
                     </svg>
                     Llamar
                 </a>  
-                <button class="menu-toggle">☰</button>
+                <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
             </nav>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu-sidebar" id="mobileMenuSidebar">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="imagenes/logo.png" alt="ServiTec Logo" style="height: 40px;">
+                <span style="font-size: 20px;">ServiTec</span>
+            </div>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#servicios" onclick="closeMobileMenu()">Servicios</a></li>
+            <li><a href="#nosotros" onclick="closeMobileMenu()">Nosotros</a></li>
+            <li><a href="#contacto" onclick="closeMobileMenu()">Contacto</a></li>
+        </ul>
+        <div class="mobile-cta">
+            <a href="tel:+573108732791" class="cta-button" style="width: 100%; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                Llamar
+            </a>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="badge">Servicio técnico especializado</div>
+                    <div class="badge">✨ Servicio técnico especializado</div>
                     <h1>Soluciones técnicas para tu hogar</h1>
                     <p>Reparación y mantenimiento profesional de electrodomésticos en Bogotá. Técnicos certificados con experiencia comprobada.</p>
                     <div class="hero-buttons">
@@ -721,6 +1202,7 @@
             </div>
         </div>
     </section>
+
     <section id="contacto" class="contact">
         <div class="container">
             <div class="section-header">
@@ -742,7 +1224,7 @@
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
                         <h3>Email</h3>
-                        <a href="mailto:alejandrosolano2304@gmail.com">luiissantiago3@gmail.com</a>
+                        <a href="mailto:luiissantiago3@gmail.com">luiissantiago3@gmail.com</a>
                     </div>
                     <div class="contact-card location" onclick="openLocationModal()" style="cursor: pointer;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -762,7 +1244,7 @@
                         <input type="hidden" name="_subject" value="Nuevo cliente - ServiTec">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_next" value="http://127.0.0.1:5500/">
+                        <input type="hidden" name="_next" value="https://tudominio.com">
 
                         <div class="form-group">
                             <input type="text" name="nombre" placeholder="Nombres y apellidos" required>
@@ -780,7 +1262,7 @@
                             <button type="submit" class="submit-btn">Enviar</button>
                         </div>
                         <div class="privacy-notice">
-                            Al enviar este formulario aceptas nuestra política de privacidad.
+                            Al enviar este formulario aceptas nuestra <a onclick="openPrivacyModal()">política de privacidad</a>.
                         </div>
                     </form>
                 </div>
@@ -788,6 +1270,22 @@
         </div>
     </section>
 
+    <!-- Modal de Política de Privacidad -->
+    <div id="privacyModal" class="privacy-modal">
+        <div class="privacy-modal-content">
+            <span class="privacy-close" onclick="closePrivacyModal()">&times;</span>
+            <h2>Política de Privacidad y Tratamiento de Datos Personales</h2>
+            <p>De conformidad con lo dispuesto en la Ley 1581 de 2012 y el Decreto 1377 de 2013, informamos que los datos personales suministrados a través de este formulario (nombre, correo electrónico y descripción del requerimiento) serán recolectados, almacenados y utilizados únicamente con la finalidad de atender solicitudes de contacto, prestar información sobre nuestros servicios y dar respuesta a los requerimientos realizados por el usuario.</p>
+            
+            <p>El titular de los datos autoriza de manera libre, previa, expresa e informada el tratamiento de sus datos personales y declara que la información suministrada es veraz. Los datos no serán compartidos con terceros sin autorización, salvo cuando sea requerido por una autoridad competente.</p>
+            
+            <p>Como titular de la información, el usuario tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales, así como a revocar la autorización otorgada, conforme a lo establecido en la ley. Para ejercer estos derechos, podrá realizar la solicitud a través de los canales de contacto dispuestos en este sitio web.</p>
+            
+            <p>El responsable del tratamiento garantiza la confidencialidad, seguridad e integridad de la información, adoptando las medidas técnicas, humanas y administrativas necesarias para proteger los datos personales.</p>
+        </div>
+    </div>
+
+    <!-- Modal de Ubicación -->
     <div id="locationModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeLocationModal()">&times;</span>
@@ -796,7 +1294,7 @@
             
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.545000000000!2d-74.144500000000!3d4.702000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99c4dxxxxxxx%3A0xyyyyyyyyyyyyyyyy!2sCarrera+106+%2371a-83%2C+Bogot%C3%A1%2C+Colombia!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.545!2d-74.1445!3d4.702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99c4d!2sBogot%C3%A1!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco"
                     width="100%" 
                     height="400" 
                     style="border:0; border-radius: 12px;" 
@@ -826,7 +1324,7 @@
                 <span>ServiTec</span>
             </div>
             <p style="color: #94a3b8; margin-bottom: 8px;">Servicio técnico especializado en Bogotá</p>
-            <p style="color: #64748b; font-size: 14px;">© 202 ServiTec. Todos los derechos reservados</p>
+            <p style="color: #64748b; font-size: 14px;">© 2025 ServiTec. Todos los derechos reservados</p>
         </div>
     </footer>
 
@@ -842,382 +1340,58 @@
         </svg>
     </a>
 
-    <style>
-        .contact {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .contact-info-column {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .contact-card {
-            padding: 30px;
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        .contact-card.phone {
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-        }
-
-        .contact-card.email {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-        }
-
-        .contact-card.location {
-            background: linear-gradient(135deg, #e9d5ff, #d8b4fe);
-        }
-
-        .contact-card:hover {
-            transform: translateX(8px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-card svg {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 16px;
-        }
-
-        .contact-card.phone svg { stroke: #10b981; }
-        .contact-card.email svg { stroke: #2563eb; }
-        .contact-card.location svg { stroke: #8b5cf6; }
-
-        .contact-card h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: #0f172a;
-        }
-
-        .contact-card a {
-            color: inherit;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .contact-form-container {
-            background: linear-gradient(135deg, #f8fafc, #ffffff);
-            padding: 50px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .contact-form-container h3 {
-            font-size: 32px;
-            margin-bottom: 12px;
-            color: #0f172a;
-        }
-
-        .contact-form-container .subtitle {
-            font-size: 16px;
-            color: #64748b;
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 16px;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s;
-            background: white;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: #2563eb;
-            color: white;
-            padding: 16px 48px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .submit-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        }
-
-        .privacy-notice {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #64748b;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: white;
-            margin: 5% auto;
-            padding: 40px;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 900px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .close-modal {
-            color: #64748b;
-            float: right;
-            font-size: 36px;
-            font-weight: bold;
-            line-height: 1;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: #2563eb;
-        }
-
-        .modal-content h2 {
-            font-size: 36px;
-            color: #0f172a;
-            margin-bottom: 16px;
-        }
-
-        .modal-description {
-            font-size: 18px;
-            color: #64748b;
-            margin-bottom: 32px;
-            line-height: 1.8;
-        }
-
-        .map-container {
-            margin-bottom: 32px;
-        }
-
-        .coverage-areas {
-            background: #f8fafc;
-            padding: 32px;
-            border-radius: 16px;
-        }
-
-        .coverage-areas h3 {
-            font-size: 24px;
-            color: #0f172a;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .office-info {
-            text-align: center;
-        }
-
-        .office-card {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .office-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
-
-        .office-card h4 {
-            font-size: 28px;
-            color: #0f172a;
-            margin-bottom: 16px;
-        }
-
-        .office-address {
-            font-size: 20px;
-            font-weight: 600;
-            color: #2563eb;
-            margin-bottom: 8px;
-        }
-
-        .office-city {
-            font-size: 16px;
-            color: #64748b;
-            margin-bottom: 20px;
-        }
-
-        .office-description {
-            font-size: 16px;
-            color: #475569;
-            line-height: 1.8;
-        }
-
-        footer {
-            background: #12244d;
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 16px;
-        }
-
-        .footer-logo img {
-            width: 35px;
-            height: 35px;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            transition: all 0.3s;
-            z-index: 999;
-        }
-
-        .whatsapp-float:hover {
-            background: #20ba5a;
-            transform: scale(1.1);
-        }
-
-        .whatsapp-float svg {
-            width: 32px;
-            height: 32px;
-        }
-
-        .phone-float {
-            position: fixed;
-            bottom: 110px;
-            right: 32px;
-            background: #2563eb;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.4);
-            text-decoration: none;
-            transition: all 0.3s;
-            z-index: 999;
-        }
-
-        .phone-float:hover {
-            background: #1d4ed8;
-            transform: scale(1.1);
-        }
-
-        .phone-float svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        @media (max-width: 968px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form-container {
-                padding: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .modal-content {
-                margin: 10% auto;
-                padding: 24px;
-                width: 95%;
-            }
-        }
-    </style>
-
     <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = 'none';
-            } else {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '80px';
-                navLinks.style.right = '20px';
-                navLinks.style.background = 'white';
-                navLinks.style.padding = '20px';
-                navLinks.style.borderRadius = '12px';
-                navLinks.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)';
-            }
-        });
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('mobileMenuSidebar');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            sidebar.classList.add('active');
+            sidebar.style.display = 'block';
+            overlay.style.display = 'block';
+        }
 
+        function closeMobileMenu() {
+            const sidebar = document.getElementById('mobileMenuSidebar');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            sidebar.classList.remove('active');
+            setTimeout(() => {
+                sidebar.style.display = 'none';
+                overlay.style.display = 'none';
+            }, 300);
+        }
+
+        // Privacy Modal Functions
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'block';
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+        }
+
+        // Location Modal Functions
+        function openLocationModal() {
+            document.getElementById('locationModal').style.display = 'block';
+        }
+
+        function closeLocationModal() {
+            document.getElementById('locationModal').style.display = 'none';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const privacyModal = document.getElementById('privacyModal');
+            const locationModal = document.getElementById('locationModal');
+            
+            if (event.target == privacyModal) {
+                privacyModal.style.display = 'none';
+            }
+            if (event.target == locationModal) {
+                locationModal.style.display = 'none';
+            }
+        }
+
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1227,28 +1401,9 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    const navLinks = document.querySelector('.nav-links');
-                    if (window.innerWidth <= 768) {
-                        navLinks.style.display = 'none';
-                    }
                 }
             });
         });
-
-        function openLocationModal() {
-            document.getElementById('locationModal').style.display = 'block';
-        }
-
-        function closeLocationModal() {
-            document.getElementById('locationModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('locationModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
     </script>
 </body>
 </html>
